@@ -378,7 +378,6 @@ app.get(
 
       const auditParams = [auditId];
 
-      // المستخدم العادي يشوف فحوصاته فقط
       if (req.user.role !== "admin") {
         auditQuery += `
           AND audits.user_id = ?
@@ -1868,13 +1867,18 @@ app.post(
 // SERVER
 // --------------------------------
 
-const PORT = 5000;
+const PORT =
+  process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(
-    `Server running on http://localhost:${PORT}`
-  );
-});
+app.listen(
+  PORT,
+  "0.0.0.0",
+  () => {
+    console.log(
+      `Server running on port ${PORT}`
+    );
+  }
+);
 
 testConnection().catch(() => {
   process.exit(1);
