@@ -485,6 +485,7 @@ app.post(
 
       browser =
         await chromium.launch({
+          channel: "chromium",
           headless: true,
         });
 
